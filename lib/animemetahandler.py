@@ -161,7 +161,7 @@ class AnimeMetaData(MetaData):
 
         At least one of tvdb_id and imdb_id must be given.
         '''
-        helper.start('get_episodes_meta with params %s, imdb:%s, tvdb:%s, num_eps:%s, %s, season:%s' % (tvshowtitle, imdb_id, tvdb_id, num_episodes, first_air_date, season))
+        #helper.start('get_episodes_meta with params %s, imdb:%s, tvdb:%s, num_eps:%s, %s, season:%s' % (tvshowtitle, imdb_id, tvdb_id, num_episodes, first_air_date, season))
         if not imdb_id and not tvdb_id:
             helper.log_debug('Invalid imdb_id and tvdb_id')
             return []
@@ -199,6 +199,7 @@ class AnimeMetaData(MetaData):
                 helper.log_debug('No TVDB ID available, could not find TV show with imdb: %s' % imdb_id)
                 tvdb_id = ''
 
+				
             if not meta_list:
                 meta_list = [self._MetaData__init_episode_meta(imdb_id, tvdb_id, '', 0, 0, first_air_date)]
                 meta_list[0]['playcount'] = 0
