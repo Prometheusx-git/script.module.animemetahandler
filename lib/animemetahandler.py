@@ -68,7 +68,7 @@ helper = Helper('script.module.animemetahandler', argv=sys.argv)
 
 
 class AnimeMetaData(MetaData):
-    def __init__(self, prepack_images=False, preparezip=False, tmdb_api_key='af95ef8a4fe1e697f86b8c194f2e5e11'):
+    def __init__(self, prepack_images=False, preparezip=False, tmdb_api_key='af95ef8a4fe1e697f86b8c194f2e5e11', omdb_api_key=common.addon.get_setting('omdb_api_key')):
         '''
         A copy of __init__ from the metahandler plugin, modified to use a 
         different db path, which unfortunately required pasting this function 
@@ -79,6 +79,7 @@ class AnimeMetaData(MetaData):
         self.path = helper.get_profile()
         self.cache_path = make_dir(self.path, 'meta_cache')
         self.tmdb_api_key = tmdb_api_key
+        self.omdb_api_key = omdb_api_key		
 
         if prepack_images:
             #create container working directory
