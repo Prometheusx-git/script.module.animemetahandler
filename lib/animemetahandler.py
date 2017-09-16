@@ -487,7 +487,7 @@ class AnimeMetaData(MetaData):
         # If we still haven't found anything, let's try IMDB to see if we can find a show
         if tvdb_id == '' and imdb_id == '':
             helper.log_debug("No match, so let's try IMDB")
-            tmdb = TMDB(api_key=self.tmdb_api_key, lang=self._MetaData__get_tmdb_language())
+            tmdb = TMDB(tmdb_api_key=self.tmdb_api_key, lang=self._MetaData__get_tmdb_language())
             imdb_meta = tmdb.search_imdb(name)
             helper.log_debug('IMDB metadata result: %s' % str(imdb_meta))
             if imdb_meta and 'tt' in imdb_meta.get('imdbID', ''):
@@ -515,7 +515,7 @@ class AnimeMetaData(MetaData):
                 meta = self._show_to_meta(show, imdb_id, tvdb_id, name, year)
                 if meta['plot'] == 'None' or meta['plot'] == '' or meta['plot'] == 'TBD' or meta['plot'] == 'No overview found.' or meta['rating'] == 0 or meta['duration'] == 0 or meta['cover_url'] == '':
                     common.addon.log(' Some info missing in TVdb for TVshow *** '+ name + ' ***. Will search imdb for more', 0)
-                    tmdb = TMDB(api_key=self.tmdb_api_key, lang=self._MetaData__get_tmdb_language())
+                    tmdb = TMDB(tmdb_api_key=self.tmdb_api_key, lang=self._MetaData__get_tmdb_language())
                     imdb_meta = tmdb.search_imdb(name, imdb_id)
                     if imdb_meta:
                         imdb_meta = tmdb.update_imdb_meta(meta, imdb_meta)
@@ -532,7 +532,7 @@ class AnimeMetaData(MetaData):
 
                 return meta
             else:
-                tmdb = TMDB(api_key=self.tmdb_api_key, lang=self._MetaData__get_tmdb_language())
+                tmdb = TMDB(tmdb_api_key=self.tmdb_api_key, lang=self._MetaData__get_tmdb_language())
                 imdb_meta = tmdb.search_imdb(name, imdb_id)
                 if imdb_meta:
                     meta = tmdb.update_imdb_meta(meta, imdb_meta)
