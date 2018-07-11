@@ -162,6 +162,7 @@ class AnimeMetaData(MetaData):
 
         At least one of tvdb_id and imdb_id must be given.
         '''
+        #helper.show_error_dialog(['',str(first_air_date)])        		
         #helper.start('get_episodes_meta with params %s, imdb:%s, tvdb:%s, num_eps:%s, %s, season:%s' % (tvshowtitle, imdb_id, tvdb_id, num_episodes, first_air_date, season))
         if not imdb_id and not tvdb_id:
             helper.log_debug('Invalid imdb_id and tvdb_id')
@@ -177,7 +178,8 @@ class AnimeMetaData(MetaData):
 
         # Look up in cache first
         meta_list = self._cache_lookup_episodes(imdb_id, tvdb_id, first_air_date, season, num_episodes)
-
+        if not meta_list : meta_list = self._cache_lookup_episodes(imdb_id, tvdb_id, '', season, num_episodes)
+		
         if not meta_list:
             if tvdb_id:
                 # if not cached, grab all of the raw data using get_show_and_episodes()
